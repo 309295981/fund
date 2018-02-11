@@ -1,0 +1,78 @@
+package {package};
+
+import java.util.List;
+import org.junit.Test;
+
+import {package_bean}.{bean_class_name};
+import {package_server}.I{bean_class_name}Manager;
+
+public class {bean_class_name}ManagerTest extends ServerTestCase {
+
+	private {bean_class_name}Manager mapper =  ({bean_class_name}Manager)this.getBean("{bean_name}ManagerImpl");
+
+	@Test
+	public void countByBean()
+	{
+		{bean_class_name} bean =  new {bean_class_name}();
+		int count = mapper.countByBean(bean);
+		System.out.print(count);
+	}
+
+	@Test
+	public void delete()
+	{
+		{bean_class_name} bean = null;
+		int id = 0 ;
+		int count = mapper.delete(id);
+		System.out.print(count);
+	}
+	
+	@Test
+	public void insert()
+	{
+		{bean_class_name} bean =  new {bean_class_name}();
+		/*
+		bean.set...`
+		*/
+		int count = mapper.insert(bean);
+		System.out.print(count);
+	}
+	
+	@Test
+	public void update()
+	{
+		{bean_class_name} bean =  new {bean_class_name}();
+		/*
+		bean.set...`
+		*/
+		int count = mapper.update(bean);
+		System.out.print(count);
+	}
+	
+	@Test
+	public void selectByPrimaryKey()
+	{
+		{bean_class_name} bean = null;
+		int id = 0 ;
+		bean = mapper.selectByPrimaryKey(id);
+		System.out.print(bean);
+	}
+	
+	@Test
+	public void selectByBean()
+	{
+		{bean_class_name} bean = new {bean_class_name}();
+		/*
+		bean.set...`
+		*/
+		
+		bean.setLimitStart(0);
+		bean.setLimitEnd(20);
+		
+		List<{bean_class_name}> list = mapper.selectByBean(bean);
+		
+		System.out.print(list.size());
+		System.out.print("\n");
+		System.out.print(bean.getRecordCount());
+	}
+}

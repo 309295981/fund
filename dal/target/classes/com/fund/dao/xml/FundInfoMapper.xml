@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fund.dao.FundInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.fund.model.FundInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="wallet_address" property="walletAddress" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="signature" property="signature" jdbcType="VARCHAR" />
+    <result column="fundraising_token_name" property="fundraisingTokenName" jdbcType="VARCHAR" />
+    <result column="fundraising_token_address" property="fundraisingTokenAddress" jdbcType="VARCHAR" />
+    <result column="fundraising_plan_amount" property="fundraisingPlanAmount" jdbcType="DECIMAL" />
+    <result column="fundraising_start" property="fundraisingStart" jdbcType="TIMESTAMP" />
+    <result column="fundraising_end" property="fundraisingEnd" jdbcType="TIMESTAMP" />
+    <result column="fundraising_signature" property="fundraisingSignature" jdbcType="VARCHAR" />
+    <result column="fundraising_status" property="fundraisingStatus" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, uid, wallet_address, title, signature, fundraising_token_name, fundraising_token_address, 
+    fundraising_plan_amount, fundraising_start, fundraising_end, fundraising_signature, 
+    fundraising_status, status, gmt_create, gmt_modified
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fund.model.FundInfoSearch" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from fund_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitEnd!=-1" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fund_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fund_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fund.model.FundInfo" >
+    insert into fund_info (id, uid, wallet_address, 
+      title, signature, fundraising_token_name, 
+      fundraising_token_address, fundraising_plan_amount, 
+      fundraising_start, fundraising_end, fundraising_signature, 
+      fundraising_status, status, gmt_create, 
+      gmt_modified)
+    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, #{walletAddress,jdbcType=BIGINT}, 
+      #{title,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, #{fundraisingTokenName,jdbcType=VARCHAR}, 
+      #{fundraisingTokenAddress,jdbcType=VARCHAR}, #{fundraisingPlanAmount,jdbcType=DECIMAL}, 
+      #{fundraisingStart,jdbcType=TIMESTAMP}, #{fundraisingEnd,jdbcType=TIMESTAMP}, #{fundraisingSignature,jdbcType=VARCHAR}, 
+      #{fundraisingStatus,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModified,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fund.model.FundInfo" >
+    insert into fund_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="walletAddress != null" >
+        wallet_address,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="signature != null" >
+        signature,
+      </if>
+      <if test="fundraisingTokenName != null" >
+        fundraising_token_name,
+      </if>
+      <if test="fundraisingTokenAddress != null" >
+        fundraising_token_address,
+      </if>
+      <if test="fundraisingPlanAmount != null" >
+        fundraising_plan_amount,
+      </if>
+      <if test="fundraisingStart != null" >
+        fundraising_start,
+      </if>
+      <if test="fundraisingEnd != null" >
+        fundraising_end,
+      </if>
+      <if test="fundraisingSignature != null" >
+        fundraising_signature,
+      </if>
+      <if test="fundraisingStatus != null" >
+        fundraising_status,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="walletAddress != null" >
+        #{walletAddress,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null" >
+        #{signature,jdbcType=VARCHAR},
+      </if>
+      <if test="fundraisingTokenName != null" >
+        #{fundraisingTokenName,jdbcType=VARCHAR},
+      </if>
+      <if test="fundraisingTokenAddress != null" >
+        #{fundraisingTokenAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fundraisingPlanAmount != null" >
+        #{fundraisingPlanAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="fundraisingStart != null" >
+        #{fundraisingStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fundraisingEnd != null" >
+        #{fundraisingEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fundraisingSignature != null" >
+        #{fundraisingSignature,jdbcType=VARCHAR},
+      </if>
+      <if test="fundraisingStatus != null" >
+        #{fundraisingStatus,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fund.model.FundInfoSearch" resultType="java.lang.Integer" >
+    select count(*) from fund_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fund.model.FundInfo" >
+    update fund_info
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="walletAddress != null" >
+        wallet_address = #{walletAddress,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null" >
+        signature = #{signature,jdbcType=VARCHAR},
+      </if>
+      <if test="fundraisingTokenName != null" >
+        fundraising_token_name = #{fundraisingTokenName,jdbcType=VARCHAR},
+      </if>
+      <if test="fundraisingTokenAddress != null" >
+        fundraising_token_address = #{fundraisingTokenAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fundraisingPlanAmount != null" >
+        fundraising_plan_amount = #{fundraisingPlanAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="fundraisingStart != null" >
+        fundraising_start = #{fundraisingStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fundraisingEnd != null" >
+        fundraising_end = #{fundraisingEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fundraisingSignature != null" >
+        fundraising_signature = #{fundraisingSignature,jdbcType=VARCHAR},
+      </if>
+      <if test="fundraisingStatus != null" >
+        fundraising_status = #{fundraisingStatus,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fund.model.FundInfo" >
+    update fund_info
+    set uid = #{uid,jdbcType=BIGINT},
+      wallet_address = #{walletAddress,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      signature = #{signature,jdbcType=VARCHAR},
+      fundraising_token_name = #{fundraisingTokenName,jdbcType=VARCHAR},
+      fundraising_token_address = #{fundraisingTokenAddress,jdbcType=VARCHAR},
+      fundraising_plan_amount = #{fundraisingPlanAmount,jdbcType=DECIMAL},
+      fundraising_start = #{fundraisingStart,jdbcType=TIMESTAMP},
+      fundraising_end = #{fundraisingEnd,jdbcType=TIMESTAMP},
+      fundraising_signature = #{fundraisingSignature,jdbcType=VARCHAR},
+      fundraising_status = #{fundraisingStatus,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

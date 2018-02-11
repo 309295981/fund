@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="GB2312"?>
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <!-- ===================================================================== -->
+    <!--  以下是appender的定义                                                 -->
+    <!-- ===================================================================== -->
+    <appender name="aassets" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="${log.path}/aassets.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="GBK"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p %l - %m%n"/>
+        </layout>
+    </appender>
+    
+    <appender name="aassets-manager" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="${log.path}/aassets-manager.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="GBK"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p %l - %m%n"/>
+        </layout>
+    </appender>
+    
+    <appender name="aassets-statistic" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="${log.path}/aassets-statistic.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="GBK"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p %l - %m%n"/>
+        </layout>
+    </appender>
+    
+    <!-- spring -->
+	 <appender name="aassets-spring" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="${log.path}/aassets-spring.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="GBK"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p %l - %m%n"/>
+        </layout>
+    </appender>
+    
+    <appender name="aassets-sql" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="${log.path}/aassets-sql.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="GBK"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p %l - %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- ===================================================================== -->
+    <!--  以下是logger的定义                                                   -->
+    <!-- ===================================================================== -->
+    <logger name="com.aassets" additivity="false">
+     	<level value="${log.level}"/>
+        <appender-ref ref="aassets"/>
+    </logger>
+    
+    <logger name="com.aassets.manager" additivity="false">
+     	<level value="${log.level}"/>
+        <appender-ref ref="aassets-manager"/>
+    </logger>
+    <logger name="aassets_statistic" additivity="false">
+     	<level value="INFO"/>
+        <appender-ref ref="aassets-statistic"/>
+    </logger>
+    
+    <logger name="org.springframework" additivity="false">
+		<level value="${log.level}"/>
+		<appender-ref ref="aassets-spring"/>
+    </logger>
+    
+    <logger name="com.ibatis" additivity="false">   
+	   	<level value="${log.sql.level}"/>
+		<appender-ref ref="aassets-sql"/>
+	</logger>   
+	<logger name="java.sql.Connection" additivity="false">   
+	   	<level value="${log.sql.level}"/>
+		<appender-ref ref="aassets-sql"/>
+	</logger>   
+	<logger name="java.sql.Statement" additivity="false">   
+	   	<level value="${log.sql.level}"/>
+		<appender-ref ref="aassets-sql"/>
+	</logger>   
+	<logger name="java.sql.PreparedStatement" additivity="false">   
+	   	<level value="${log.sql.level}"/>
+		<appender-ref ref="aassets-sql"/> 
+	</logger>   
+	<logger name="java.sql.ResultSet" additivity="false">   
+	   	<level value="${log.sql.level}"/>
+		<appender-ref ref="aassets-sql"/>
+	</logger>   
+    
+    <!-- ===================================================================== -->
+    <!--  Root logger的定义                                                    -->
+    <!-- ===================================================================== -->
+    <root>
+        <level value="${log.level}"/>
+        <appender-ref ref="aassets"/>
+    </root>
+    </log4j:configuration>

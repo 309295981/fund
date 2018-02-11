@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<properties resource="com/shenqi/mybatis/generatorConfig.properties" />
+
+	<classPathEntry location="${classPathEntry}" />
+
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<property name="suppressTypeWarnings" value="true" />
+
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+
+		<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+			<property name="searchString" value="Example$" />
+			<property name="replaceString" value="Search" />
+		</plugin>
+
+		<plugin type="com.shenqi.mybatis.plugin.SelectByExample" />
+		<!-- plugin type="com.shinowit.mybatis.plugin.Struts2ActionPlugin" / -->
+
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="${driverClass}"
+			connectionURL="${connectionURL}" userId="${userId}" password="${password}">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="${modelPackage}"
+			targetProject="${daltargetProject}">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+			<property name="rootClass" value="com.fund.util.bean.BeanBase" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="${sqlMapperPackage}"
+			targetProject="${daltargetProject}">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="${daoMapperPackage}" targetProject="${daltargetProject}">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+
+	<!--copy the xml into generatorConfig.xml-->
+	
+<table schema="fundchain" tableName="fund_info"
+ enableUpdateByExample="false" enableDeleteByExample="false" selectByExampleQueryId="false" >
+</table>
+	</context>
+</generatorConfiguration>
+
